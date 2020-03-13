@@ -13,7 +13,7 @@ class MyUser(AbstractUser):
 
     ROLE_CHOICES = (
         (ADMIN, 'admin'),
-        (MANAGER, 'employee'),
+        (MANAGER, 'manager'),
         (EMPLOYEE, 'employee')
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True)
