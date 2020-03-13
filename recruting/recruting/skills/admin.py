@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from recruting.skills.models import Category, SkillSet, SkillQuestion, Position
+from recruting.skills.models import Category, SkillSet, SkillQuestion, Position, Question
 
 
 @admin.register(Category)
@@ -21,4 +21,10 @@ class PositionAdmin(admin.ModelAdmin):
 @admin.register(SkillQuestion)
 class SkillQuestionAdmin(admin.ModelAdmin):
     list_display = ('id', 'skill_set', 'question')
+
+
+@admin.register(Question)
+class SkillQuestionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
 

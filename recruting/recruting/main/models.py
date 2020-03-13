@@ -6,6 +6,11 @@ from recruting.skills.models import Position, SkillSet, Category
 from rest_framework import serializers
 
 
+def validate_role(value):
+    if 3 < value < 0:
+        return serializers.ValidationError('invalid number of Role')
+
+
 class MyUser(AbstractUser):
     ADMIN = 1
     MANAGER = 2
@@ -16,7 +21,7 @@ class MyUser(AbstractUser):
         (MANAGER, 'manager'),
         (EMPLOYEE, 'employee')
     )
-    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, validators=[validate_role])
 
     def __str__(self):
         return f'({self.id}) {self.username} {self.first_name} {self.last_name}'

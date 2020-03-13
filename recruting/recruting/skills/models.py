@@ -21,7 +21,7 @@ class Position(models.Model):
         verbose_name_plural = 'Positions'
 
     def __str__(self):
-        return f'{self.id} {self.status}-{self.department}'
+        return f'id:{self.id},  status:{self.status},  depart:{self.department}'
 
 
 class Question(models.Model):
@@ -32,7 +32,7 @@ class Question(models.Model):
         verbose_name_plural = 'Questions'
 
     def __str__(self):
-        return f'{self.question}'
+        return f'id:{self.id}, question: {self.question}'
 
 
 class SkillSet(models.Model):
@@ -44,7 +44,7 @@ class SkillSet(models.Model):
         verbose_name_plural = 'SkillSets'
 
     def __str__(self):
-        return f'{self.id} {self.skill}'
+        return f'id:{self.id}, skill: {self.skill}'
 
 
 class SkillQuestion(models.Model):
@@ -56,4 +56,4 @@ class SkillQuestion(models.Model):
         verbose_name_plural = 'SkillQuestions'
 
     def __str__(self):
-        return f'{self.id} {self.skill_set}  {self.question}'
+        return f'id: {self.id},  skill:{self.skill_set},  question:{self.question}'
