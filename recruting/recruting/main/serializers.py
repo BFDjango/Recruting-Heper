@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from recruting.main.models import MyUser, Admin, Manager, Employee, EmployeeSkill
+from recruting.main.models import MyUser, Admin, Manager, Employee, EmployeeSkill, Profile
 from recruting.skills.serializers import SkillSetSerializer, CategorySerializer, PositionSerializer
 
 
@@ -32,7 +32,7 @@ class AdminSerializer(serializers.ModelSerializer):
 
 class ManagerSerializer(serializers.ModelSerializer):
     user = MyUserSerializer(required=True)
-    department = CategorySerializer(required=True)
+    department = CategorySerializer(write_only=True)
 
     class Meta:
         model = Manager
@@ -55,3 +55,9 @@ class EmployeeSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeSkill
         fields = ('id', 'employee', 'skill')
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('id', 'user', 'bio')

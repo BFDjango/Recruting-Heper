@@ -1,13 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from recruting.main.models import Admin, Manager, Employee, EmployeeSkill, MyUser
+from recruting.main.models import Admin, Manager, Employee, EmployeeSkill, MyUser, Profile
 
 
 @admin.register(MyUser)
 class MyAdmin(UserAdmin):
-    list_display = ('id','username', 'email', 'first_name', 'last_name', 'is_staff', 'role')
+    list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'role')
 
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'bio')
 
 @admin.register(Admin)
 class AdminAdmin(admin.ModelAdmin):

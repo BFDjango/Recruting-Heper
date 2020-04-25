@@ -1,4 +1,10 @@
+from django.contrib.auth.models import UserManager
 from django.db import models
+
+
+# class CategoryManager(UserManager):
+#     def get_admin(self):
+#         return self.filter()
 
 
 class Category(models.Model):

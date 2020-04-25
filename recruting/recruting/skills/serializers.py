@@ -4,7 +4,7 @@ from recruting.skills.models import Category, SkillQuestion, SkillSet, Position,
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    department = serializers.CharField(required=True)
+    department = serializers.CharField()
 
     class Meta:
         model = Category
