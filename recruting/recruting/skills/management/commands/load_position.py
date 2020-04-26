@@ -1,17 +1,18 @@
-from django.core.management.base import BaseCommand
-
 import linecache
+
+from django.core.management.base import BaseCommand
 
 from recruting.skills.models import Category, Position
 
 
-class  Command(BaseCommand):
+class Command(BaseCommand):
 
     def handle(self, *args, **options):
         path = 'data/departments.csv'
         departments = linecache.getlines(path)
         path = 'data/positions.csv'
         positions = linecache.getlines(path)
+
         for row in departments:
             row = row.rstrip("\n\r")
             try:

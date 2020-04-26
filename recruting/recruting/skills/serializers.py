@@ -3,8 +3,21 @@ from rest_framework import serializers
 from recruting.skills.models import Category, SkillQuestion, SkillSet, Position, Question
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.Serializer):
     department = serializers.CharField(required=True)
+
+    class Meta:
+        model = Category
+        fields = ('id', 'department')
+
+    def create(self, validated_data):
+        return Category.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        pass
+
+
+class CategorySerializer2(serializers.ModelSerializer):
 
     class Meta:
         model = Category

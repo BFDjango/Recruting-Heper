@@ -8,7 +8,10 @@ from recruting.main import views
 urlpatterns = [
     path('login/', obtain_jwt_token),
     path('reg/', views.RegistrationView.as_view()),
-    path('logout/', views.logout)
+    path('admins/', views.AdminView.as_view()),
+    path('managers/', views.ManagerView.as_view()),
+    path('managers/<int:pk>/', views.ManagerDetail.as_view()),
+    path('employees/', views.EmployeeView.as_view())
 ]
 
 router = DefaultRouter()

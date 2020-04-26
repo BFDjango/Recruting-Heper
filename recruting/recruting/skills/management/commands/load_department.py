@@ -1,11 +1,10 @@
-from django.core.management.base import BaseCommand
-
 import linecache
+from django.core.management.base import BaseCommand
 
 from recruting.skills.models import Category
 
 
-class  Command(BaseCommand):
+class Command(BaseCommand):
 
     def handle(self, *args, **options):
         path = 'data/departments.csv'

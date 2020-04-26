@@ -1,11 +1,10 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-
 from rest_framework import generics
+from rest_framework.response import Response
 
-from ..models import Position,Category
+from ..models import Position, Category
 from ..serializers import CategorySerializer, PositionSerializer
-
 
 
 class CategoryList(generics.ListCreateAPIView):
@@ -19,6 +18,27 @@ class CategoryList(generics.ListCreateAPIView):
 class CategoryDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+    def put(self, request, *args, **kwargs):
+        try:
+            if request.user.role == 1:
+                return self.update(request, *args, **kwargs)
+            else:
+                return Response('Permission denied!!!')
+        except Exception as e:
+            return Response('Please Authorized!!!')
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            if request.user.role == 1:
+                return self.destroy(request, *args, **kwargs)
+            else:
+                return Response('Permission denied!!!')
+        except Exception as e:
+            return Response('Please Authorize!!!')
 
 
 class PositionList(generics.ListCreateAPIView):

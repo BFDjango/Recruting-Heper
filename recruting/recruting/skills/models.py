@@ -1,8 +1,15 @@
 from django.db import models
 
 
+# class CategoryManager(models.Manager):
+#     def get_queryset(self):
+#         return super().get_queryset().filter()
+
+
 class Category(models.Model):
     department = models.CharField(max_length=255)
+
+    # objects = models.Manager()
 
     class Meta:
         verbose_name = 'Department'
