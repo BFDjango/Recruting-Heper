@@ -21,16 +21,16 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class PositionSerializer(serializers.ModelSerializer):
     status = serializers.CharField(required=True)
-    department = CategorySerializer(required=True)
+    department = CategorySerializer(required=False)
 
     class Meta:
-        model = Question
-        fields = ('id', 'status', 'department')
+        model = Position
+        fields = ['id', 'status', 'department']
 
 
 class SkillSetSerializer(serializers.ModelSerializer):
     skill = serializers.CharField(required=True)
-    position = PositionSerializer(required=True)
+    position = PositionSerializer()
 
     class Meta:
         model = SkillSet
@@ -38,8 +38,8 @@ class SkillSetSerializer(serializers.ModelSerializer):
 
 
 class SkillSetQuestionSerializer(serializers.ModelSerializer):
-    skill_set = SkillSetSerializer(required=True)
-    question = QuestionSerializer(required=True)
+    skill_set = SkillSetSerializer()
+    question = QuestionSerializer()
 
     class Meta:
         model = SkillQuestion

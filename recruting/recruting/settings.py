@@ -176,3 +176,35 @@ JWT_AUTH = {
     'JWT_AUTH_COOKIE': None,
 }
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(message)s',
+        },
+        'simple': {
+            'format': '%(levelname)s - %(message)s',
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'core_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'log': {
+            'handlers': ['core_handler', 'console'],
+        },
+    },
+}
