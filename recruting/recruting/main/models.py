@@ -8,8 +8,6 @@ from rest_framework import serializers
 from recruting.skills.models import Position, SkillSet, Category
 
 
-
-
 MAX_FILE_SIZE = 1024000
 ALLOWED_EXTENSIONS = ['.jpg', '.png', '.doc', '.pdf']
 
@@ -25,9 +23,6 @@ def validate_extension(value):
         ext = split_ext[1]
         if not ext.lower() in ALLOWED_EXTENSIONS:
             raise ValidationError(f'not allowed file, valid extensions: {ALLOWED_EXTENSIONS}')
-
-
-
 
 
 def validate_role(value):
@@ -53,9 +48,9 @@ class MyUser(AbstractUser):
 
 class Admin(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='admin_photo',
-                              validators=[validate_extension(), validate_file_size()],
-                              blank=True, null=True)
+    # photo = models.ImageField(upload_to='admin_photo',
+    #                           validators=[validate_extension, validate_file_size],
+    #                           blank=True, null=True)
 
     def __str__(self):
         return f'{self.id} {self.user}'
@@ -64,9 +59,9 @@ class Admin(models.Model):
 class Manager(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     department = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
-    photo = models.ImageField(upload_to='manager_photo',
-                              validators=[validate_extension(), validate_file_size()],
-                              blank=True, null=True)
+    # photo = models.ImageField(upload_to='manager_photo',
+    #                           validators=[validate_extension, validate_file_size],
+    #                           blank=True, null=True)
 
     def __str__(self):
         return f'Manager: {self.id} {self.user} {self.department}'
@@ -75,9 +70,9 @@ class Manager(models.Model):
 class Employee(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='positions', blank=True, null=True)
-    photo = models.ImageField(upload_to='employee_photo',
-                              validators=[validate_extension(), validate_file_size()],
-                              blank=True, null=True)
+    # photo = models.ImageField(upload_to='employee_photo',
+    #                           validators=[validate_extension, validate_file_size],
+    #                           blank=True, null=True)
 
     class Meta:
         verbose_name = 'Employee'
