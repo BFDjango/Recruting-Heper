@@ -23,15 +23,6 @@ class MyUser(AbstractUser):
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, validators=[validate_role])
 
-    def save(self, *args, **kwargs):
-        super(MyUser, self).save(*args, **kwargs)
-        if self.role == 1:
-            Admin.objects.get_or_create(user=self)
-        elif self.role == 2:
-            Manager.objects.get_or_create(user=self)
-        else:
-            Employee.objects.get_or_create(user=self)
-
     def __str__(self):
         return f'({self.id}) {self.username} {self.first_name} {self.last_name}'
 

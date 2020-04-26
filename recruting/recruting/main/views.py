@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from recruting.main.models import MyUser
-from recruting.main.serializers import MyUserSerializer
+from recruting.main.serializers import MyUserFullSerializer
 logger = logging.getLogger('log')
 
 
@@ -19,7 +19,7 @@ class RegistrationView(APIView):
     def post(self, request):
         passwd = request.data.get('password')
         usr = request.data.get('username')
-        serializer = MyUserSerializer(data=request.data)
+        serializer = MyUserFullSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         my_user = MyUser.objects.get(username=usr)
@@ -39,7 +39,7 @@ def logout(request):
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = MyUserSerializer
+    serializer_class = MyUserFullSerializer
     # permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):

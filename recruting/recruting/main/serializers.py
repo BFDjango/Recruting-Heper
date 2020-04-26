@@ -4,17 +4,23 @@ from recruting.main.models import MyUser, Admin, Manager, Employee, EmployeeSkil
 from recruting.skills.serializers import SkillSetSerializer, CategorySerializer, PositionSerializer
 
 
-class MyUserSerializer(serializers.ModelSerializer):
+class MyUserShortSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True)
+
+    class Meta:
+        model = MyUser
+        fields = ('id', 'username')
+
+
+class MyUserFullSerializer(MyUserShortSerializer):
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     role = serializers.IntegerField(required=True)
     password = serializers.CharField(write_only=True)
-    username = serializers.CharField(required=True)
 
-    class Meta:
-        model = MyUser
-        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email', 'role')
+    class Meta(MyUserShortSerializer.Meta):
+        fields = MyUserShortSerializer.Meta.fields + ('password', 'first_name', 'last_name', 'email', 'role')
 
     def validate_password(self, pswd):
         if len(pswd) < 5:
@@ -23,7 +29,7 @@ class MyUserSerializer(serializers.ModelSerializer):
 
 
 class AdminSerializer(serializers.ModelSerializer):
-    user = MyUserSerializer(read_only=True)
+    user = MyUserFullSerializer(read_only=True)
 
     class Meta:
         model = Admin
@@ -31,7 +37,7 @@ class AdminSerializer(serializers.ModelSerializer):
 
 
 class ManagerSerializer(serializers.ModelSerializer):
-    user = MyUserSerializer(required=True)
+    user = MyUserFullSerializer(required=True)
     department = CategorySerializer(required=True)
 
     class Meta:
@@ -40,7 +46,7 @@ class ManagerSerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    user = MyUserSerializer(required=True)
+    user = MyUserFullSerializer(required=True)
     position = PositionSerializer(required=True)
 
     class Meta:

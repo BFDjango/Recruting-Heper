@@ -20,18 +20,22 @@ class PositionDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk1, pk2):
-        product = self.get_product(request, pk1, pk2)
-        try:
-            request.data.pop('category')
-        except:
-            pass
-        serializer = PositionSerializer(instance=product, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+        if request.user.role == 1:
+            product = self.get_product(request, pk1, pk2)
+            try:
+                request.data.pop('category')
+            except:
+                pass
+            serializer = PositionSerializer(instance=product, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors)
+        else: return Response('Permission denied!!')
 
     def delete(self, request, pk1, pk2):
-        product = self.get_product(request, pk1, pk2)
-        product.delete()
-        return Response({"delete_status": "successful"})
+        if request.user.role == 1:
+            product = self.get_product(request, pk1, pk2)
+            product.delete()
+            return Response({"delete_status": "successful"})
+        else: return Response('Permission denied!!')

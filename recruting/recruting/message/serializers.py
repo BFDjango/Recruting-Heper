@@ -12,3 +12,5 @@ class ChatSerializer(serializers.ModelSerializer):
         model = Chat
         fields = ('id', 'from_mes', 'to_mes', 'mess', 'date')
 
+    def create(self, validated_data):
+        return Chat.objects.create(**validated_data)
