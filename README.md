@@ -1,3 +1,5 @@
+## LevelUp
+
 # Corporate employee position helper
 
 In the contemporary world, corporate world needs effective and time saving solution for each of its internal processes.
@@ -11,5 +13,8 @@ Using the this system, an employee can:
 
 Technically, the system is implemented as a Django Web application for company executives and employees.
 
-# Authors
-Islam Abdukarimov & Madi Keshilbayev
+### Authors
+| Name | GitHub account | Email |
+| --- | --- | --- |
+| Islam Abdukarimov | [iseke](https://github.com/iseke/) | islamabdukarimov1999@mail.ru |
+| Madi Keshilbayev | [mkeshilbaev](https://github.com/mkeshilbaev/) | m.keshilbaev@gmail.com |
