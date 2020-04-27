@@ -11,7 +11,9 @@ Using the this system, an employee can:
 * transparently plan financial expectations
 * track progress as a professional
 
+
 Technically, the system is implemented as a Django Web application for company executives and employees.
+
 
 ### Authors
 | Name | GitHub account | Email |
