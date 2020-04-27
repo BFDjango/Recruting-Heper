@@ -1,2 +1,2 @@
-from .generics import CategoryList,CategoryDetails,PositionList
+from .generics import CategoryList,CategoryDetails,PositionList, QuestionList, SkillSetQuestionsList, SkillSetList
 from .cbv import PositionDetail

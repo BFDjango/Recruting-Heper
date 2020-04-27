@@ -4,8 +4,9 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.response import Response
 
-from ..models import Position,Category
-from ..serializers import CategorySerializer, PositionSerializer
+from ..models import Position, Category, Question, SkillSet, SkillQuestion
+from ..serializers import CategorySerializer, PositionSerializer, QuestionSerializer, SkillSetSerializer, \
+    SkillSetQuestionSerializer, SkillSetCreateSerializer, SkillSetQuestionCreateSerializer
 
 
 class CategoryList(generics.ListCreateAPIView):
@@ -55,3 +56,28 @@ class PositionList(generics.ListCreateAPIView):
         except Category.DoesNotExist:
             raise Http404
         serializer.save(department=category)
+
+
+class QuestionList(generics.ListCreateAPIView):
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()
+
+
+class SkillSetList(generics.ListCreateAPIView):
+    queryset = SkillSet.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return SkillSetCreateSerializer
+        elif self.request.method == 'GET':
+            return SkillSetSerializer
+
+
+class SkillSetQuestionsList(generics.ListCreateAPIView):
+    queryset = SkillQuestion.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return SkillSetQuestionCreateSerializer
+        elif self.request.method == 'GET':
+            return SkillSetQuestionSerializer

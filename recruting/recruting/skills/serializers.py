@@ -25,7 +25,15 @@ class PositionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Position
-        fields = ['id', 'status', 'department']
+        fields = ('id', 'status', 'department')
+
+
+class SkillSetCreateSerializer(serializers.ModelSerializer):
+    skill = serializers.CharField(required=True)
+
+    class Meta:
+        model = SkillSet
+        fields = ('id', 'skill', 'position')
 
 
 class SkillSetSerializer(serializers.ModelSerializer):
@@ -40,6 +48,13 @@ class SkillSetSerializer(serializers.ModelSerializer):
 class SkillSetQuestionSerializer(serializers.ModelSerializer):
     skill_set = SkillSetSerializer()
     question = QuestionSerializer()
+
+    class Meta:
+        model = SkillQuestion
+        fields = ('id', 'skill_set', 'question')
+
+
+class SkillSetQuestionCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SkillQuestion

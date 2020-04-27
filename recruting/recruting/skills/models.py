@@ -37,7 +37,7 @@ class Question(models.Model):
 
 class SkillSet(models.Model):
     skill = models.CharField(max_length=255)
-    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='skills')
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='skills', blank=True, null=True)
 
     class Meta:
         verbose_name = 'SkillSet'

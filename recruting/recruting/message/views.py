@@ -24,10 +24,10 @@ def chatting(request):
         from_mes = request.user.username
         if serializer.is_valid():
             serializer.save(from_mes=from_mes)
-            logger.info(f"{request.user} message")
-            logger.warning(f"{request.user} message")
-            logger.error(f"{request.user} message")
-            logger.critical(f"{request.user} message")
+            logger.info(f"{request.user.username} write message")
+            logger.warning(f"{request.user.username} write message")
+            logger.error(f"{request.user.username} write message")
+            logger.critical(f"{request.user.username} write message")
             return Response(serializer.data)
         return Response(serializer.errors)
 
